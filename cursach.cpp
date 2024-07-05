@@ -59,7 +59,7 @@ int main(array<System::String ^> ^args) //выводит список бойцо
 		"Выход                                                        "
 	};
 	char BlankLine[]="                                                               ";
-	FILE *in; //открываем файл локально
+	FILE *in, *out; //открываем файл локально
 	struct bs *brawlers; //создаем структуру на осонове шаблона
 	struct sp *spisok;
 	setlocale(LC_CTYPE,"Russian"); //для поддержки русского языка
@@ -82,7 +82,10 @@ int main(array<System::String ^> ^args) //выводит список бойцо
 	for(i=0;i<k;i++) //считываем данные из списка
 		fscanf(in,"%s%s%s%d%d%s", brawlers[i].name, brawlers[i].rarity,
 			brawlers[i].role, &brawlers[i].damage, &brawlers[i].hp, brawlers[i].data);
-	
+	out=fopen("dannie.txt", "w");
+	for(i=0;i<k;i++)
+		fprintf(out,"%s %s %s %d %d %s \n", brawlers[i].name, brawlers[i].rarity,
+			brawlers[i].role, &brawlers[i].damage, &brawlers[i].hp, brawlers[i].data);
 	for(i=0;i<k;i++) //выводим данные на экран
 		printf("\n%-15s %-15s %-15s %6ld %6ld %s", brawlers[i].name,
 			brawlers[i].rarity, brawlers[i].role, brawlers[i].damage,
